@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilal Muhazzin — Digital Marketing</title>
+  <meta name="description" content="Portfolio of Bilal Muhazzin, a Digital Marketing Professional specializing in Paid Social, Email Automation, SEO, and Campaign Strategy. Real budgets. Real results.">
+  <meta name="keywords" content="Digital Marketing, SEO, Facebook Ads, Google Ads, Email Marketing, Mangalore">
+  <meta name="author" content="Bilal Muhazzin">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bilal Muhazzin | Digital Marketing Professional">
+  <meta property="og:description" content="Fresh B.Com Marketing graduate with hands-on experience running live campaigns.">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Bilal Muhazzin","jobTitle":"Digital Marketing Professional","alumniOf":"St. Aloysius College, Mangalore"}
+  </script>
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== VARIABLES ===== */
+    :root {
+      --navy:       #0a1628;
+      --navy-mid:   #112240;
+      --gold:       #c9a84c;
+      --gold-light: #e8c97a;
+      --cream:      #f5f0e8;
+      --cream-dark: #c8c0b0;
+      --white:      #ffffff;
+      --muted:      #8a9bb5;
+      --border:     rgba(201,168,76,0.2);
+    }
+
+    /* ===== BASE ===== */
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: Georgia, 'Times New Roman', serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,22,40,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s;
+    }
+    nav.scrolled { padding: 0.85rem 3rem; }
+
+    .nav-logo {
+      font-size: 1.4rem; font-weight: bold; letter-spacing: 0.12em;
+      color: var(--gold); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 3rem 5rem;
+      background: var(--navy);
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(29,52,97,0.55) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.6rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 36px; height: 1px; background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-name {
+      font-size: clamp(3.2rem, 8.5vw, 7rem);
+      font-weight: normal; line-height: 1.05;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .hero-name .gold { color: var(--gold); font-style: italic; }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2.5vw, 1.6rem);
+      font-style: italic; color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .hero-desc {
+      font-family: Arial, sans-serif;
+      font-size: 0.96rem; line-height: 1.9;
+      color: var(--cream-dark); max-width: 520px;
+      margin-bottom: 2.8rem;
+    }
+    .hero-btns { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.85rem 2.4rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.69rem; letter-spacing: 0.15em;
+      text-transform: uppercase; text-decoration: none;
+      transition: all 0.25s; display: inline-block;
+      cursor: pointer; border: none;
+    }
+    .btn-gold  { background: var(--gold); color: var(--navy); border: 1px solid var(--gold); }
+    .btn-gold:hover { background: transparent; color: var(--gold); }
+    .btn-outline { background: transparent; color: var(--cream); border: 1px solid rgba(245,240,232,0.28); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ===== STATS ===== */
+    .stats {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 3rem;
+    }
+    .stats-inner {
+      display: flex; justify-content: center;
+      align-items: center; gap: 0; flex-wrap: wrap;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .stat {
+      text-align: center;
+      padding: 1rem 3.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-size: 2.6rem; font-weight: bold;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 0.55rem;
+    }
+    .stat-lbl {
+      font-family: 'Courier New', monospace;
+      font-size: 0.63rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ===== SECTION SHARED ===== */
+    section { padding: 7rem 3rem; }
+    .sec-header { margin-bottom: 3.5rem; }
+    .sec-tag {
+      font-family: 'Courier New', monospace;
+      font-size: 0.63rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.9rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .sec-tag::after { content: ''; width: 50px; height: 1px; background: var(--gold); }
+    .sec-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: normal; color: var(--white); line-height: 1.15;
+    }
+    .sec-title em { color: var(--gold); font-style: italic; }
+
+    /* ===== PROJECTS ===== */
+    #projects { background: var(--navy); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: 1px solid var(--border);
+    }
+    .proj-card {
+      background: var(--navy);
+      padding: 2.8rem;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-card:nth-child(2n) { border-right: none; }
+    .proj-card:nth-last-child(-n+2) { border-bottom: none; }
+    .proj-card:hover { background: var(--navy-mid); }
+    .proj-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; width: 0; height: 3px;
+      background: var(--gold);
+      transition: width 0.35s ease;
+    }
+    .proj-card:hover::before { width: 100%; }
+
+    .proj-num {
+      font-size: 4rem; font-weight: bold;
+      color: rgba(201,168,76,0.07);
+      position: absolute; top: 0.8rem; right: 1.8rem;
+      line-height: 1; font-style: italic;
+      pointer-events: none;
+    }
+    .proj-badge {
+      font-family: 'Courier New', monospace;
+      font-size: 0.59rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      padding: 0.28rem 0.75rem;
+      display: inline-block; margin-bottom: 1.1rem;
+    }
+    .proj-title {
+      font-size: 1.45rem; font-weight: normal;
+      color: var(--white); margin-bottom: 1rem; line-height: 1.3;
+    }
+    .proj-desc {
+      font-family: Arial, sans-serif;
+      font-size: 0.83rem; line-height: 1.9;
+      color: var(--muted); margin-bottom: 1.8rem;
+    }
+    .proj-metrics {
+      display: flex; gap: 1.8rem; flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+    .m-val {
+      font-size: 1.35rem; font-weight: bold;
+      color: var(--gold-light); line-height: 1;
+    }
+    .m-lbl {
+      font-family: 'Courier New', monospace;
+      font-size: 0.56rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ===== SKILLS ===== */
+    #skills { background: var(--navy-mid); }
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--border);
+    }
+    .skill-grp {
+      background: var(--navy-mid);
+      padding: 2.2rem;
+      border-right: 1px solid var(--border);
+    }
+    .skill-grp:last-child { border-right: none; }
+    .skill-grp-title {
+      font-family: 'Courier New', monospace;
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.3rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-grp ul { list-style: none; }
+    .skill-grp li {
+      font-family: Arial, sans-serif;
+      font-size: 0.84rem; color: var(--cream-dark);
+      padding: 0.38rem 0;
+      display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .skill-grp li::before { content: '—'; color: var(--gold); font-size: 0.7rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* ===== CERTIFICATIONS ===== */
+    #certifications { background: var(--navy); }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .cert-card {
+      border: 1px solid var(--border);
+      padding: 2.4rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .cert-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.03); }
+
+    .cert-who {
+      font-family: 'Courier New', monospace;
+      font-size: 0.61rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .cert-name {
+      font-size: 1.18rem; color: var(--white);
+      margin-bottom: 0.8rem; line-height: 1.4;
+    }
+    .cert-desc {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem; color: var(--muted); line-height: 1.8;
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 8rem 3rem 4rem;
+    }
+    .contact-inner { max-width: 700px; margin: 0 auto; }
+    .contact-title {
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      font-weight: normal; color: var(--white); margin-bottom: 1.2rem;
+    }
+    .contact-title em { color: var(--gold); }
+    .contact-sub {
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem; color: var(--muted);
+      margin-bottom: 3.5rem; line-height: 1.85;
+    }
+    .contact-items {
+      display: flex; justify-content: center;
+      gap: 3rem; flex-wrap: wrap; margin-bottom: 5rem;
+    }
+    .c-link {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 0.6rem;
+      transition: color 0.2s;
+    }
+    .c-link:hover { color: var(--gold); }
+    .c-link::before { content: '→'; color: var(--gold); }
+    .footer {
+      font-family: 'Courier New', monospace;
+      font-size: 0.59rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(138,155,181,0.38);
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .skill-grid { grid-template-columns: repeat(3, 1fr); }
+      .skill-grp:nth-child(3) { border-right: none; }
+      .skill-grp:nth-child(4) { border-right: 1px solid var(--border); }
+      .skill-grp:nth-child(4), .skill-grp:nth-child(5) {
+        border-top: 1px solid var(--border);
+      }
+      .skill-grp:nth-child(5) { border-right: none; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      #contact { padding: 5rem 1.5rem 3rem; }
+      .stats { padding: 2.5rem 1.5rem; }
+      .stats-inner { flex-direction: column; gap: 0; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; width: 100%; }
+      .stat:last-child { border-bottom: none; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .proj-card { border-right: none !important; border-bottom: 1px solid var(--border) !important; }
+      .proj-card:last-child { border-bottom: none !important; }
+      .skill-grid { grid-template-columns: 1fr 1fr; }
+      .skill-grp { border-right: 1px solid var(--border) !important; border-top: 1px solid var(--border) !important; }
+      .skill-grp:nth-child(2n) { border-right: none !important; }
+      .skill-grp:nth-child(1), .skill-grp:nth-child(2) { border-top: none !important; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .contact-items { flex-direction: column; gap: 1.5rem; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header>
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">BM</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<main>
+  <div class="hero" id="home">
+    <div class="hero-inner fade-up">
+      <div class="hero-eyebrow">Digital Marketing Professional</div>
+      <h1 class="hero-name">Bilal <span class="gold">Muhazzin</span></h1>
+      <p class="hero-subtitle">Campaigns. Content. Analytics.</p>
+      <p class="hero-desc">Fresh B.Com Marketing graduate with hands-on experience running live campaigns across paid social, paid search, email automation and organic SEO. Real budgets. Real results.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-gold">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STATS ===== -->
+  <div class="stats fade-up">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-num">67,930</div>
+        <div class="stat-lbl">Facebook Reach</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">66.67%</div>
+        <div class="stat-lbl">Email Open Rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">613</div>
+        <div class="stat-lbl">Link Clicks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">&#8377;0.82</div>
+        <div class="stat-lbl">Cost Per Click</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">40+</div>
+        <div class="stat-lbl">Keywords</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects">
+    <div class="section-inner">
+      <div class="sec-header fade-up">
+        <div class="sec-tag">Live Work</div>
+        <h2 class="sec-title">Campaigns &amp; <em>Projects</em></h2>
+      </div>
+      <div class="proj-grid">
+
+        <article class="proj-card fade-up">
+          <div class="proj-num">01</div>
+          <div class="proj-badge">Paid Social</div>
+          <h3 class="proj-title">Facebook Ads — Traffic Campaign</h3>
+          <p class="proj-desc">Ran a live Facebook traffic campaign on a &#8377;500 budget targeting tech-savvy users aged 18–35 across India. Defined audience, created ad copy and monitored performance daily.</p>
+          <div class="proj-metrics">
+            <div><div class="m-val">67,930</div><div class="m-lbl">Reach</div></div>
+            <div><div class="m-val">613</div><div class="m-lbl">Clicks</div></div>
+            <div><div class="m-val">&#8377;0.82</div><div class="m-lbl">CPC</div></div>
+            <div><div class="m-val">88,198</div><div class="m-lbl">Views</div></div>
+          </div>
+        </article>
+
+        <article class="proj-card fade-up">
+          <div class="proj-num">02</div>
+          <div class="proj-badge">Email Marketing</div>
+          <h3 class="proj-title">Email Automation — Pizza Valley</h3>
+          <p class="proj-desc">Built a 3-email automation workflow on GetResponse for a local restaurant. Designed welcome, promotional and re-engagement emails with performance tracking.</p>
+          <div class="proj-metrics">
+            <div><div class="m-val">66.67%</div><div class="m-lbl">Open Rate</div></div>
+            <div><div class="m-val">57.14%</div><div class="m-lbl">CTR</div></div>
+            <div><div class="m-val">21</div><div class="m-lbl">Subscribers</div></div>
+            <div><div class="m-val">3</div><div class="m-lbl">Conversions</div></div>
+          </div>
+        </article>
+
+        <article class="proj-card fade-up">
+          <div class="proj-num">03</div>
+          <div class="proj-badge">Paid Search</div>
+          <h3 class="proj-title">Google Search Ads — Pizza Valley</h3>
+          <p class="proj-desc">Set up a Google Search campaign for a local Mangalore restaurant targeting 15+ keywords across purchase-intent and awareness categories on a &#8377;500 budget.</p>
+          <div class="proj-metrics">
+            <div><div class="m-val">&#8377;500</div><div class="m-lbl">Budget</div></div>
+            <div><div class="m-val">15+</div><div class="m-lbl">Keywords</div></div>
+            <div><div class="m-val">Local</div><div class="m-lbl">Targeting</div></div>
+          </div>
+        </article>
+
+        <article class="proj-card fade-up">
+          <div class="proj-num">04</div>
+          <div class="proj-badge">SEO &amp; Content</div>
+          <h3 class="proj-title">ThinkByte — Blog &amp; SEO</h3>
+          <p class="proj-desc">Built a personal tech blog on WordPress. Handled all on-page SEO using Yoast SEO and SureRank, researched 40+ keywords and tracked organic traffic weekly in GA4.</p>
+          <div class="proj-metrics">
+            <div><div class="m-val">40+</div><div class="m-lbl">Keywords</div></div>
+            <div><div class="m-val">4</div><div class="m-lbl">Pages</div></div>
+            <div><div class="m-val">GA4</div><div class="m-lbl">Analytics</div></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section id="skills">
+    <div class="section-inner">
+      <div class="sec-header fade-up">
+        <div class="sec-tag">Expertise</div>
+        <h2 class="sec-title">Technical <em>Skills</em></h2>
+      </div>
+      <div class="skill-grid">
+
+        <div class="skill-grp fade-up">
+          <div class="skill-grp-title">Marketing Platforms</div>
+          <ul>
+            <li>Google Ads</li>
+            <li>Meta Ads (Facebook / Instagram)</li>
+            <li>LinkedIn Marketing</li>
+            <li>GetResponse</li>
+          </ul>
+        </div>
+
+        <div class="skill-grp fade-up">
+          <div class="skill-grp-title">Analytics</div>
+          <ul>
+            <li>Google Analytics 4</li>
+            <li>ROAS Tracking</li>
+            <li>Campaign Reporting</li>
+            <li>MonsterInsight</li>
+          </ul>
+        </div>
+
+        <div class="skill-grp fade-up">
+          <div class="skill-grp-title">SEO &amp; Content</div>
+          <ul>
+            <li>On-Page SEO</li>
+            <li>Keyword Research</li>
+            <li>Internal Linking</li>
+            <li>Yoast SEO &amp; SureRank</li>
+          </ul>
+        </div>
+
+        <div class="skill-grp fade-up">
+          <div class="skill-grp-title">Tools &amp; AI</div>
+          <ul>
+            <li>Canva</li>
+            <li>ChatGPT &amp; Claude</li>
+            <li>WordPress &amp; Elementor</li>
+            <li>Advanced Excel</li>
+          </ul>
+        </div>
+
+        <div class="skill-grp fade-up">
+          <div class="skill-grp-title">Other Skills</div>
+          <ul>
+            <li>A/B Testing</li>
+            <li>Competitor Research</li>
+            <li>Funnel Optimization</li>
+            <li>Email Automation</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CERTIFICATIONS ===== -->
+  <section id="certifications">
+    <div class="section-inner">
+      <div class="sec-header fade-up">
+        <div class="sec-tag">Credentials</div>
+        <h2 class="sec-title">Certifications &amp; <em>Education</em></h2>
+      </div>
+      <div class="cert-grid">
+
+        <article class="cert-card fade-up">
+          <div class="cert-who">upGrad x PwC Academy — 2025</div>
+          <div class="cert-name">Professional Certificate in Digital Marketing &amp; AI</div>
+          <div class="cert-desc">Paid media, SEO, social media, email automation, content strategy and AI-powered campaign tools.</div>
+        </article>
+
+        <article class="cert-card fade-up">
+          <div class="cert-who">Google Skillshop — 2025</div>
+          <div class="cert-name">AI-Powered Performance Ads Certification</div>
+          <div class="cert-desc">Performance Max setup, smart bidding, audience signals, asset group optimization and conversion tracking.</div>
+        </article>
+
+        <article class="cert-card fade-up">
+          <div class="cert-who">St. Aloysius College, Mangalore — 2022–2025</div>
+          <div class="cert-name">B.Com — Marketing Specialization</div>
+          <div class="cert-desc">Final year project on Market Penetration &amp; Retail Strategy for Zudio — consumer behavior and pricing strategies.</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== CONTACT / FOOTER ===== -->
+<footer id="contact">
+  <div class="contact-inner fade-up">
+    <h2 class="contact-title">Let's <em>Work</em> Together</h2>
+    <p class="contact-sub">Open to digital marketing roles in Mangalore and beyond.</p>
+    <div class="contact-items">
+      <a href="mailto:bilalmuhazzin650@gmail.com" class="c-link">bilalmuhazzin650@gmail.com</a>
+      <a href="tel:+917019228564" class="c-link">+91 7019228564</a>
+      <a href="https://linkedin.com/in/bilal-muhazzin22" target="_blank" rel="noopener noreferrer" class="c-link">LinkedIn Profile</a>
+    </div>
+    <p class="footer">Bilal Muhazzin — Mangalore, India — 2025</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Navbar scroll shrink
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll fade-up animations
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px', threshold: 0.12 }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  });
+</script>
+</body>
+</html>
