@@ -16,25 +16,25 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* ===== VARIABLES ===== */
     :root {
-      --navy:        #080f1d;
-      --navy-mid:    #0d1a30;
-      --navy-light:  #112240;
-      --gold:        #c9a84c;
-      --gold-light:  #e8c97a;
-      --gold-dim:    rgba(201,168,76,0.12);
-      --cream:       #f5f0e8;
-      --cream-dark:  #c8c0b0;
-      --white:       #ffffff;
-      --muted:       #8a9bb5;
-      --border:      rgba(201,168,76,0.18);
-      --border-dim:  rgba(138,155,181,0.1);
+      --navy:        #ffffff;
+      --navy-mid:    #f6f7fb;
+      --navy-light:  #ffffff;
+      --gold:        #6c3bff;
+      --gold-light:  #8b68ff;
+      --gold-dim:    rgba(108,59,255,0.10);
+      --cream:       #1a1a1a;
+      --cream-dark:  #666666;
+      --white:       #1a1a1a;
+      --muted:       #666666;
+      --border:      rgba(108,59,255,0.18);
+      --border-dim:  rgba(26,26,26,0.08);
     }
 
     /* ===== BASE ===== */
@@ -42,9 +42,10 @@
     body {
       background: var(--navy);
       color: var(--cream);
-      font-family: 'Inter', Arial, sans-serif;
+      font-family: 'Manrope', Arial, sans-serif;
       overflow-x: hidden;
-      line-height: 1.6;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -66,23 +67,24 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.4rem 4rem;
-      background: rgba(8,15,29,0.94);
+      background: rgba(255,255,255,0.94);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       transition: padding 0.3s, background 0.3s;
     }
-    nav.scrolled { padding: 0.85rem 4rem; background: rgba(8,15,29,0.99); }
+    nav.scrolled { padding: 0.85rem 4rem; background: rgba(255,255,255,0.99); }
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-weight: 700;
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 1.18rem; font-weight: 700;
+      letter-spacing: -0.04em;
       color: var(--gold); text-decoration: none;
     }
     .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
     .nav-links a {
-      font-size: 0.67rem; letter-spacing: 0.18em;
+      font-size: 0.72rem; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--muted);
-      text-decoration: none; transition: color 0.2s; font-weight: 500;
+      text-decoration: none; transition: color 0.2s; font-weight: 700;
     }
     .nav-links a:hover { color: var(--gold); }
     .nav-links .nav-cta a {
@@ -104,7 +106,7 @@
     /* Mobile Menu */
     .mobile-menu {
       display: none; position: fixed; inset: 0;
-      background: rgba(8,15,29,0.99);
+      background: rgba(255,255,255,0.99);
       z-index: 999; flex-direction: column;
       justify-content: center; align-items: center; gap: 2.5rem;
     }
@@ -122,17 +124,18 @@
 
     /* ===== BUTTONS ===== */
     .btn {
-      padding: 0.88rem 2.1rem;
-      font-size: 0.67rem; letter-spacing: 0.18em;
+      padding: 0.95rem 1.6rem;
+      font-size: 0.72rem; letter-spacing: 0.14em;
       text-transform: uppercase; text-decoration: none;
       transition: all 0.25s; display: inline-flex;
       align-items: center; gap: 0.5rem;
-      cursor: pointer; border: none; font-weight: 600;
-      font-family: 'Inter', sans-serif;
+      cursor: pointer; border: none; font-weight: 800;
+      border-radius: 999px;
+      font-family: 'Manrope', Arial, sans-serif;
     }
     .btn-gold { background: var(--gold); color: var(--navy); border: 1px solid var(--gold); }
-    .btn-gold:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.25); }
-    .btn-outline { background: transparent; color: var(--cream); border: 1px solid rgba(245,240,232,0.25); }
+    .btn-gold:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,59,255,0.25); }
+    .btn-outline { background: transparent; color: var(--cream); border: 1px solid rgba(17,24,39,0.16); }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
     .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
     .btn-ghost:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
@@ -146,37 +149,39 @@
     .hero::before {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 75% 40%, rgba(201,168,76,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse at 15% 80%, rgba(17,34,64,0.7) 0%, transparent 60%);
+        radial-gradient(ellipse at 75% 40%, rgba(108,59,255,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 80%, rgba(0,200,83,0.06) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero::after {
       content: ''; position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px);
+        linear-gradient(rgba(108,59,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,59,255,0.03) 1px, transparent 1px);
       background-size: 80px 80px;
       pointer-events: none;
     }
     .hero-inner { position: relative; z-index: 1; max-width: 840px; }
     .hero-eyebrow {
-      font-size: 0.67rem; letter-spacing: 0.28em;
+      font-size: 0.72rem; letter-spacing: 0.22em;
       text-transform: uppercase; color: var(--gold);
       margin-bottom: 1.8rem;
-      display: flex; align-items: center; gap: 1rem; font-weight: 600;
+      display: flex; align-items: center; gap: 1rem; font-weight: 800;
     }
     .hero-eyebrow::before { content: ''; display: block; width: 36px; height: 1px; background: var(--gold); flex-shrink: 0; }
     .hero-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Sora', Arial, sans-serif;
       font-size: clamp(3rem, 7.5vw, 6.5rem);
-      font-weight: 700; line-height: 1.05;
+      font-weight: 800; line-height: 0.98;
+      letter-spacing: -0.06em;
       color: var(--white); margin-bottom: 0.6rem;
     }
-    .hero-name .gold { color: var(--gold); font-style: italic; }
+    .hero-name .gold { color: var(--gold); font-style: normal; }
     .hero-subtitle {
       font-size: clamp(1rem, 2.2vw, 1.3rem);
       color: var(--muted); margin-bottom: 1rem;
-      font-weight: 300;
+      font-weight: 600;
+      letter-spacing: -0.02em;
     }
     .hero-desc {
       font-size: 0.93rem; color: var(--cream-dark);
@@ -185,47 +190,24 @@
     .hero-desc strong { color: var(--cream); font-weight: 600; }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    /* ===== STATS ===== */
-    .stats {
-      background: var(--navy-mid);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 3.5rem 4rem;
-    }
-    .stats-inner {
-      display: flex; justify-content: center;
-      align-items: center; flex-wrap: wrap;
-      max-width: 1200px; margin: 0 auto;
-    }
-    .stat { text-align: center; padding: 1rem 4rem; border-right: 1px solid var(--border); }
-    .stat:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem; font-weight: 700;
-      color: var(--gold); line-height: 1; margin-bottom: 0.6rem;
-    }
-    .stat-lbl {
-      font-size: 0.6rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--muted); font-weight: 500;
-    }
-
     /* ===== SECTION SHARED ===== */
     section { padding: 7rem 4rem; }
     .section-inner { max-width: 1200px; margin: 0 auto; }
     .sec-header { margin-bottom: 4rem; }
     .sec-tag {
-      font-size: 0.62rem; letter-spacing: 0.25em;
+      font-size: 0.7rem; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--gold);
       margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.8rem; font-weight: 600;
+      display: flex; align-items: center; gap: 0.8rem; font-weight: 800;
     }
     .sec-tag::after { content: ''; width: 48px; height: 1px; background: var(--gold); }
     .sec-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Sora', Arial, sans-serif;
       font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700; color: var(--white); line-height: 1.15;
+      font-weight: 800; color: var(--white); line-height: 1.08;
+      letter-spacing: -0.05em;
     }
-    .sec-title em { color: var(--gold); font-style: italic; }
+    .sec-title em { color: var(--gold); font-style: normal; }
     .sec-sub { font-size: 0.9rem; color: var(--muted); margin-top: 0.8rem; max-width: 520px; line-height: 1.85; }
 
     /* ===== PROJECTS ===== */
@@ -249,36 +231,40 @@
     .proj-card:hover::before { transform: scaleX(1); }
     .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
     .proj-badge {
-      font-size: 0.58rem; letter-spacing: 0.2em;
+      font-size: 0.64rem; letter-spacing: 0.15em;
       text-transform: uppercase; color: var(--gold);
       background: var(--gold-dim); padding: 0.28rem 0.85rem;
-      display: inline-block; font-weight: 600;
+      display: inline-block; font-weight: 800;
+      border-radius: 999px;
     }
     .proj-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem; font-weight: 700;
-      color: rgba(201,168,76,0.06); line-height: 1; font-style: italic;
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 4rem; font-weight: 800;
+      color: rgba(108,59,255,0.10); line-height: 1;
+      letter-spacing: -0.06em;
     }
     .proj-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; font-weight: 700;
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 1.35rem; font-weight: 800;
+      letter-spacing: -0.03em;
       color: var(--white); margin-bottom: 1.2rem; line-height: 1.3;
     }
     .proj-section { margin-bottom: 1.1rem; }
     .proj-section-label {
-      font-size: 0.58rem; letter-spacing: 0.2em;
+      font-size: 0.64rem; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--gold);
-      margin-bottom: 0.4rem; font-weight: 600;
+      margin-bottom: 0.45rem; font-weight: 800;
       display: flex; align-items: center; gap: 0.4rem;
     }
     .proj-section-label::before { content: ''; display: inline-block; width: 10px; height: 1px; background: var(--gold); }
-    .proj-section-text { font-size: 0.82rem; color: var(--muted); line-height: 1.85; }
+    .proj-section-text { font-size: 0.94rem; color: var(--cream); line-height: 1.8; font-weight: 500; }
     .proj-tools { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
     .proj-tool-tag {
-      font-size: 0.62rem; color: var(--cream-dark);
+      font-size: 0.68rem; color: var(--cream);
       border: 1px solid var(--border-dim);
-      padding: 0.22rem 0.7rem;
-      background: rgba(138,155,181,0.05);
+      padding: 0.3rem 0.78rem;
+      background: rgba(108,59,255,0.07);
+      font-weight: 600;
     }
     .proj-metrics {
       display: flex; gap: 1.5rem; flex-wrap: wrap;
@@ -286,27 +272,28 @@
       padding-top: 1.5rem; margin-top: auto;
     }
     .m-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; font-weight: 700;
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 1.35rem; font-weight: 800;
       color: var(--gold-light); line-height: 1;
+      letter-spacing: -0.04em;
     }
     .m-lbl {
-      font-size: 0.55rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--muted);
-      margin-top: 0.3rem; font-weight: 500;
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--cream-dark);
+      margin-top: 0.35rem; font-weight: 700;
     }
     .proj-learning {
       margin-top: 1.3rem;
-      padding: 1rem 1.2rem;
-      border-left: 2px solid var(--gold);
-      background: rgba(201,168,76,0.04);
+      padding: 1.1rem 1.3rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(108,59,255,0.08);
     }
     .proj-learning-label {
-      font-size: 0.55rem; letter-spacing: 0.2em;
+      font-size: 0.62rem; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--gold);
-      margin-bottom: 0.35rem; font-weight: 600;
+      margin-bottom: 0.45rem; font-weight: 800;
     }
-    .proj-learning-text { font-size: 0.8rem; color: var(--muted); line-height: 1.8; font-style: italic; }
+    .proj-learning-text { font-size: 0.94rem; color: var(--cream); line-height: 1.8; font-style: normal; font-weight: 500; }
 
     /* ===== WHY HIRE ME ===== */
     #why-hire { background: var(--navy-mid); }
@@ -318,15 +305,16 @@
     }
     .hire-card::after {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at top right, rgba(201,168,76,0.08) 0%, transparent 65%);
+      background: radial-gradient(circle at top right, rgba(108,59,255,0.08) 0%, transparent 65%);
       opacity: 0; transition: opacity 0.35s;
     }
-    .hire-card:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
+    .hire-card:hover { border-color: rgba(108,59,255,0.35); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(17,24,39,0.10); }
     .hire-card:hover::after { opacity: 1; }
     .hire-icon { font-size: 2rem; margin-bottom: 1.4rem; line-height: 1; }
     .hire-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 700;
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 1.2rem; font-weight: 800;
+      letter-spacing: -0.03em;
       color: var(--white); margin-bottom: 0.8rem; line-height: 1.3;
     }
     .hire-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.9; }
@@ -368,12 +356,12 @@
       display: inline-flex; align-items: center; gap: 0.6rem;
       padding: 0.75rem 1.4rem;
       border: 1px solid var(--border);
-      background: rgba(201,168,76,0.04);
+      background: rgba(108,59,255,0.05);
       color: var(--cream-dark);
       font-size: 0.72rem; letter-spacing: 0.08em;
       font-weight: 500; transition: all 0.25s; cursor: default;
     }
-    .tool-badge:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold); transform: translateY(-2px); }
+    .tool-badge:hover { border-color: var(--gold); background: rgba(108,59,255,0.10); color: var(--gold); transform: translateY(-2px); }
     .tool-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
     /* ===== CERTIFICATIONS ===== */
@@ -390,7 +378,7 @@
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
       transform: scaleX(0); transition: transform 0.4s ease;
     }
-    .cert-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.03); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .cert-card:hover { border-color: rgba(108,59,255,0.32); background: rgba(108,59,255,0.04); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(17,24,39,0.10); }
     .cert-card:hover::before { transform: scaleX(1); }
     .cert-year {
       font-size: 0.6rem; letter-spacing: 0.2em;
@@ -399,8 +387,9 @@
     }
     .cert-who { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.1rem; }
     .cert-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Sora', Arial, sans-serif;
       font-size: 1.1rem; color: var(--white);
+      letter-spacing: -0.03em;
       margin-bottom: 0.9rem; line-height: 1.4; font-weight: 700;
     }
     .cert-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.85; }
@@ -413,23 +402,24 @@
     }
     .contact-inner { max-width: 680px; margin: 0 auto; }
     .contact-tag {
-      font-size: 0.62rem; letter-spacing: 0.25em;
+      font-size: 0.7rem; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--gold);
       margin-bottom: 1.5rem;
-      display: flex; align-items: center; justify-content: center; gap: 0.8rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center; gap: 0.8rem; font-weight: 800;
     }
     .contact-tag::before, .contact-tag::after { content: ''; width: 40px; height: 1px; background: var(--gold); }
     .contact-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Sora', Arial, sans-serif;
       font-size: clamp(2.2rem, 5vw, 4rem);
-      font-weight: 700; color: var(--white); margin-bottom: 1rem;
+      font-weight: 800; color: var(--white); margin-bottom: 1rem;
+      letter-spacing: -0.05em;
     }
-    .contact-title em { color: var(--gold); font-style: italic; }
+    .contact-title em { color: var(--gold); font-style: normal; }
     .contact-sub { font-size: 0.92rem; color: var(--muted); margin-bottom: 3.5rem; line-height: 1.9; }
     .contact-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 5rem; }
     .footer {
       font-size: 0.59rem; letter-spacing: 0.15em;
-      text-transform: uppercase; color: rgba(138,155,181,0.35);
+      text-transform: uppercase; color: rgba(26,26,26,0.28);
       border-top: 1px solid var(--border); padding-top: 2rem; line-height: 2.2;
     }
 
@@ -454,7 +444,6 @@
       .hero { padding: 8rem 2.5rem 5rem; }
       section { padding: 6rem 2.5rem; }
       #contact { padding: 6rem 2.5rem 4rem; }
-      .stats { padding: 3rem 2.5rem; }
       .cert-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
@@ -465,10 +454,6 @@
       .hero { padding: 7rem 1.5rem 4rem; }
       section { padding: 5rem 1.5rem; }
       #contact { padding: 5rem 1.5rem 3rem; }
-      .stats { padding: 2.5rem 1.5rem; }
-      .stats-inner { flex-direction: column; }
-      .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; width: 100%; }
-      .stat:last-child { border-bottom: none; }
       .proj-grid { grid-template-columns: 1fr; }
       .hire-grid { grid-template-columns: 1fr; }
       .skills-layout { grid-template-columns: 1fr 1fr; }
@@ -481,6 +466,95 @@
       .hire-card { padding: 2rem; }
       .proj-card { padding: 2rem; }
     }
+
+    /* ===== EXPERIENCE ===== */
+    #experience { background: var(--navy-mid); }
+    .exp-card {
+      border: 1px solid var(--border);
+      padding: 3rem;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s;
+    }
+    .exp-card:hover {
+      border-color: rgba(108,59,255,0.32);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 48px rgba(17,24,39,0.10);
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+    .exp-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 1.5rem;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .exp-role {
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 1.45rem; font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--white); margin-bottom: 0.3rem;
+    }
+    .exp-company {
+      font-size: 0.92rem; color: var(--gold);
+      font-weight: 600; margin-bottom: 0.25rem;
+    }
+    .exp-period {
+      font-size: 0.68rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted); font-weight: 500;
+    }
+    .exp-badge {
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      background: var(--gold-dim); padding: 0.3rem 0.95rem;
+      display: inline-block; font-weight: 600; white-space: nowrap;
+      align-self: flex-start;
+    }
+    .exp-industries {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .exp-industry-tag {
+      font-size: 0.62rem; color: var(--cream-dark);
+      border: 1px solid var(--border-dim);
+      padding: 0.25rem 0.85rem;
+      background: rgba(26,26,26,0.04);
+    }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 0.875rem; color: var(--cream-dark);
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border-dim);
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      line-height: 1.85;
+    }
+    .exp-bullets li:last-child { border-bottom: none; }
+    .exp-bullets li::before {
+      content: '→';
+      color: var(--gold); font-size: 0.72rem;
+      flex-shrink: 0; margin-top: 4px;
+    }
+    .exp-bullets li strong { color: var(--cream); font-weight: 600; }
+    .exp-tools-used {
+      margin-top: 1.8rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .exp-tools-label {
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.8rem; font-weight: 600;
+    }
+    .exp-tools-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .exp-tool {
+      font-size: 0.65rem; color: var(--cream-dark);
+      border: 1px solid var(--border);
+      padding: 0.28rem 0.8rem;
+      background: rgba(108,59,255,0.05);
+    }
   </style>
 </head>
 <body>
@@ -489,6 +563,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
   <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
   <a href="#why-hire" onclick="closeMobileMenu()">Why Hire Me</a>
   <a href="#skills" onclick="closeMobileMenu()">Skills</a>
   <a href="#tools" onclick="closeMobileMenu()">Tools</a>
@@ -502,6 +577,7 @@
     <a href="#home" class="nav-logo">BM</a>
     <ul class="nav-links">
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#why-hire">Why Me</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#tools">Tools</a></li>
@@ -528,34 +604,8 @@
       </p>
       <div class="hero-btns">
         <a href="#projects" class="btn btn-gold">View Projects</a>
-        <a href="./resume.pdf" class="btn btn-outline" download>⬇ Download Resume</a>
+        <a href="./Bilal_Muhazzin_Resume.pdf" class="btn btn-outline" download>⬇ Download Resume</a>
         <a href="https://linkedin.com/in/bilal-muhazzin22" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">LinkedIn Profile</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== STATS ===== -->
-  <div class="stats fade-up">
-    <div class="stats-inner">
-      <div class="stat">
-        <div class="stat-num" data-count="67930" data-suffix="">0</div>
-        <div class="stat-lbl">Facebook Reach</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">66.67%</div>
-        <div class="stat-lbl">Email Open Rate</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-count="613" data-suffix="">0</div>
-        <div class="stat-lbl">Link Clicks</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">₹0.82</div>
-        <div class="stat-lbl">Cost Per Click</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-count="40" data-suffix="+">0</div>
-        <div class="stat-lbl">Keywords Tracked</div>
       </div>
     </div>
   </div>
@@ -699,6 +749,59 @@
     </div>
   </section>
 
+  <!-- ===== EXPERIENCE ===== -->
+  <section id="experience">
+    <div class="section-inner">
+      <div class="sec-header fade-up">
+        <div class="sec-tag">Agency Work</div>
+        <h2 class="sec-title">Professional <em>Experience</em></h2>
+        <p class="sec-sub">Real agency internship — working on live client campaigns across multiple industries.</p>
+      </div>
+
+      <article class="exp-card fade-up">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">SEO Intern</div>
+            <div class="exp-company">Onecity Technologies — Digital Marketing Agency</div>
+            <div class="exp-period">February 2026 – Present &nbsp;·&nbsp; Mangalore, India</div>
+          </div>
+          <div class="exp-badge">Currently Active</div>
+        </div>
+
+        <div class="exp-industries">
+          <span class="exp-industry-tag">E-commerce</span>
+          <span class="exp-industry-tag">Automobile</span>
+          <span class="exp-industry-tag">ISP / Telecom</span>
+        </div>
+
+        <ul class="exp-bullets">
+          <li>Managed <strong>on-page and technical SEO</strong> for clients across E-commerce, Automobile, and ISP sectors — optimising meta tags, headers, and internal linking structures to improve organic keyword rankings and search visibility.</li>
+          <li>Conducted <strong>comprehensive site audits</strong> using SEMrush to identify technical issues including crawlability errors, page speed gaps, and mobile usability problems; documented findings and fix recommendations for the development team.</li>
+          <li>Managed <strong>50+ Google My Business (GMB)</strong> listings — handled profile optimisation, photo uploads, category corrections, and resolved suspension and verification issues to strengthen local search presence across multiple clients.</li>
+          <li>Contributed to <strong>20–30% growth in organic sessions</strong> for a client website through keyword optimisation, content restructuring, and technical fixes identified during site audit; monitored progress via GA4 and Google Search Console.</li>
+          <li>Leveraged <strong>AI tools (ChatGPT, Claude)</strong> for content ideation, keyword clustering, and SEO copy — improving content planning efficiency and output quality across client campaigns.</li>
+          <li>Executed <strong>off-page SEO strategies</strong> through structured link-building and niche directory submissions to improve domain authority and search visibility.</li>
+          <li>Prepared <strong>SEO strategy decks and keyword opportunity reports</strong> for client presentations, outlining growth plans aligned with business objectives.</li>
+        </ul>
+
+        <div class="exp-tools-used">
+          <div class="exp-tools-label">Tools Used</div>
+          <div class="exp-tools-list">
+            <span class="exp-tool">SEMrush</span>
+            <span class="exp-tool">Google Search Console</span>
+            <span class="exp-tool">GA4</span>
+            <span class="exp-tool">Google My Business</span>
+            <span class="exp-tool">ChatGPT</span>
+            <span class="exp-tool">Claude</span>
+            <span class="exp-tool">WordPress</span>
+            <span class="exp-tool">Yoast SEO</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
   <!-- ===== WHY HIRE ME ===== -->
   <section id="why-hire">
     <div class="section-inner">
@@ -832,6 +935,9 @@
         <div class="tool-badge"><span class="tool-dot"></span>Advanced Excel</div>
         <div class="tool-badge"><span class="tool-dot"></span>Google Keyword Planner</div>
         <div class="tool-badge"><span class="tool-dot"></span>Facebook Business Suite</div>
+        <div class="tool-badge"><span class="tool-dot"></span>SEMrush</div>
+        <div class="tool-badge"><span class="tool-dot"></span>Google My Business</div>
+        <div class="tool-badge"><span class="tool-dot"></span>Google Search Console</div>
       </div>
     </div>
   </section>
@@ -878,7 +984,7 @@
   <div class="contact-inner fade-up">
     <div class="contact-tag">Get In Touch</div>
     <h2 class="contact-title">Let's <em>Work</em> Together</h2>
-    <p class="contact-sub">Open to digital marketing roles in Mangalore and beyond.<br>Remote opportunities welcome.</p>
+    <p class="contact-sub">Open to digital marketing roles in Mangalore, Doha (Qatar), and beyond.<br>Available to relocate immediately &nbsp;·&nbsp; Remote opportunities welcome.</p>
     <div class="contact-btns">
       <a href="https://linkedin.com/in/bilal-muhazzin22" target="_blank" rel="noopener noreferrer" class="btn btn-gold">LinkedIn Profile</a>
       <a href="mailto:bilalmuhazzin650@gmail.com" class="btn btn-outline">✉ Email Me</a>
@@ -928,34 +1034,6 @@
       { rootMargin: '0px 0px -60px 0px', threshold: 0.08 }
     );
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // ── Counter animation for stat numbers
-    const counters = document.querySelectorAll('.stat-num[data-count]');
-    const counterObserver = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            const target = parseInt(el.getAttribute('data-count'));
-            const suffix = el.getAttribute('data-suffix') || '';
-            const duration = 1800;
-            const start = performance.now();
-            const animate = (now) => {
-              const elapsed = now - start;
-              const progress = Math.min(elapsed / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 3);
-              const value = Math.floor(eased * target);
-              el.textContent = value.toLocaleString('en-IN') + suffix;
-              if (progress < 1) requestAnimationFrame(animate);
-            };
-            requestAnimationFrame(animate);
-            obs.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    counters.forEach(el => counterObserver.observe(el));
 
     // ── Back to top button
     const backTop = document.getElementById('backTop');
