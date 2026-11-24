@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Grid Gaming Lounge | Management</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d31;--panel2:#1c2740;--line:#2b3854;--text:#f3f6ff;--muted:#9ba9c4;--green:#22c55e;--orange:#f59e0b;--red:#ef4444;--blue:#60a5fa}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#0b1020,#101a2e);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:18px clamp(14px,3vw,30px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#0c1425}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,#22c55e,#0ea5e9);display:grid;place-items:center;font-weight:900;color:#07111d;font-size:20px}.brand h1{font-size:clamp(19px,3vw,25px);margin:0;letter-spacing:.4px}.brand small{color:var(--muted)}
+#clock{text-align:right;color:#dce6fa;font-variant-numeric:tabular-nums}#clock strong{display:block;font-size:18px}
+nav button{white-space:nowrap;flex:0 0 auto}nav{display:flex;gap:8px;padding:12px clamp(12px,3vw,30px);overflow:auto;border-bottom:1px solid var(--line)}
+button,.btn{border:0;border-radius:10px;padding:10px 13px;background:#293754;color:white;font-weight:700;cursor:pointer;font:inherit}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--green);color:#06200f}.blue{background:#2563eb}.danger{background:#991b1b}.warning{background:#92400e}.tab.active{background:#e5f0ff;color:#101827}
+main{padding:18px clamp(12px,3vw,30px);max-width:1500px;margin:auto}.view{display:none}.view.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:12px;margin-bottom:16px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px}.stat span{display:block;color:var(--muted);font-size:13px}.stat strong{display:block;font-size:25px;margin-top:5px;font-variant-numeric:tabular-nums}
+.stations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.station{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;min-width:0}.station.running{border-color:#278b55}.station.expiring{border-color:var(--orange);box-shadow:0 0 0 1px #f59e0b33}.station h3{margin:0;font-size:17px}.station-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.pill{font-size:11px;padding:4px 8px;border-radius:99px;background:#33415c;color:#dce7ff}.pill.live{background:#14532d;color:#bbf7d0}.pill.warn{background:#78350f;color:#fde68a}.timer{font-size:clamp(34px,5vw,54px);font-weight:850;letter-spacing:-1.5px;text-align:center;padding:15px 0 9px;font-variant-numeric:tabular-nums;white-space:nowrap}.timer.done{color:#fca5a5}.meta{color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:8px}.station .controls{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.station .controls button{padding:9px 5px;font-size:13px}.station .extend{width:100%;margin-top:8px;background:#164e63;color:#cffafe;font-weight:800}.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.fields label,.formgrid label{font-size:12px;color:var(--muted);display:block}.fields select,.fields input,.formgrid input,.formgrid select,.formgrid textarea,input,select,textarea{width:100%;margin-top:4px;padding:9px;border-radius:9px;border:1px solid var(--line);background:#0e1729;color:var(--text);font:inherit}
+.price{font-weight:750;margin-top:10px;display:flex;justify-content:space-between}.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:5px 0 14px}.section-title h2{margin:0;font-size:21px}.muted{color:var(--muted)}.formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.formgrid .wide{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:650px;background:var(--panel)}th,td{text-align:left;padding:11px;border-bottom:1px solid var(--line);font-size:13px}th{color:#b9c7df;background:#1b2740}td{color:#e5eaf5}.right{text-align:right}.notice{background:#172c38;border:1px solid #24516a;padding:12px;border-radius:12px;color:#c8edff;margin:12px 0;font-size:13px}.danger-note{background:#3a1c22;border-color:#71313d;color:#fecdd3}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card h3{margin:0 0 12px}.rate-table input{min-width:90px}.empty{padding:22px;text-align:center;color:var(--muted)}
+footer{padding:22px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:950px){.stations{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){header{align-items:flex-start}#clock{text-align:left} .stations{grid-template-columns:1fr}.formgrid,.settings-grid{grid-template-columns:1fr}.formgrid .wide{grid-column:auto}.timer{font-size:48px}.stats{gap:8px}.stat{padding:11px}.stat strong{font-size:21px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">G</div><div><h1>GRID GAMING LOUNGE</h1><small>Gaming sessions · Billing · Daily accounts</small></div></div>
+ <div id="clock"><strong id="timeNow">--:--:--</strong><span id="dateNow">Loading phone date…</span></div>
+</header>
+<nav>
+ <button class="tab active" data-view="dashboard">Dashboard</button>
+ <button class="tab" data-view="accounts">Revenue & Expenses</button>
+ <button class="tab" data-view="rates">Rate Settings</button>
+ <button class="tab" data-view="backup">Backup & Data</button>
+ <button class="tab" data-view="device" id="deviceTab" hidden>App Settings</button>
+</nav>
+<main>
+<section class="view active" id="dashboard">
+ <div class="stats">
+  <div class="stat"><span>Active stations</span><strong id="activeCount">0 / 6</strong></div>
+  <div class="stat"><span>Today's session revenue</span><strong id="todayRevenue">₹0.00</strong></div>
+  <div class="stat"><span>Today's expenses</span><strong id="todayExpenses">₹0.00</strong></div>
+  <div class="stat"><span>Today's net</span><strong id="todayNet">₹0.00</strong></div>
+ </div>
+ <div class="section-title"><h2>Gaming Stations</h2><button id="enableSound" class="primary">Enable alarm sound</button></div>
+ <div class="notice" id="alarmNotice">Keep this page open for reliable in-browser alarms. Timers use the device's current date/time and recover from a refresh. Sound must be enabled by tapping the button once.</div>
+ <div class="stations" id="stations"></div>
+</section>
+<section class="view" id="accounts">
+ <div class="section-title"><h2>Revenue & Expenses</h2><span class="muted" id="accountDate"></span></div>
+ <div class="stats">
+  <div class="stat"><span>Session revenue</span><strong id="accRevenue">₹0.00</strong></div>
+  <div class="stat"><span>Other income</span><strong id="accIncome">₹0.00</strong></div>
+  <div class="stat"><span>Expenses</span><strong id="accExpenses">₹0.00</strong></div>
+  <div class="stat"><span>Net total</span><strong id="accNet">₹0.00</strong></div>
+ </div>
+ <div class="card">
+  <h3>Add income or expense</h3>
+  <div class="formgrid">
+   <label>Entry type<select id="entryType"><option value="expense">Expense</option><option value="income">Other income</option></select></label>
+   <label>Amount (₹)<input id="entryAmount" type="number" min="0" step="0.01" placeholder="0.00"></label>
+   <label>Category<input id="entryCategory" placeholder="Electricity, rent, snacks…"></label>
+   <label class="wide">Note (optional)<input id="entryNote" placeholder="Details"></label>
+  </div>
+  <div class="actions"><button class="primary" id="addEntry">Save entry</button></div>
+ </div>
+ <div class="section-title" style="margin-top:20px"><h2>Today's entries</h2></div>
+ <div class="tablewrap"><table><thead><tr><th>Time</th><th>Type</th><th>Category / Station</th><th>Details</th><th class="right">Amount</th><th></th></tr></thead><tbody id="entriesBody"></tbody></table></div>
+</section>
+<section class="view" id="rates">
+ <div class="section-title"><h2>Editable Rate Settings</h2><button class="primary" id="saveRates">Save rates</button></div>
+ <div class="notice">Set independent prices for 30 minutes and 1 hour. Longer sessions combine full-hour prices plus the separate 30-minute price for any extra half hour. PS station rates are total package prices for the selected controller count. Existing sessions keep the rates they started with.</div>
+ <div class="card">
+  <h3>Steering Simulator — hourly only</h3>
+  <div class="formgrid">
+   <label>Normal games — 30 minutes (₹)<input type="number" min="0" step=".01" id="steerNormal30"></label>
+   <label>Normal games — 1 hour (₹)<input type="number" min="0" step=".01" id="steerNormal60"></label>
+   <label>GTA 6 — 30 minutes (₹)<input type="number" min="0" step=".01" id="steerGta30"></label>
+   <label>GTA 6 — 1 hour (₹)<input type="number" min="0" step=".01" id="steerGta60"></label>
+  </div>
+ </div>
+ <div id="psRateCards" class="settings-grid" style="margin-top:14px"></div>
+</section>
+<section class="view" id="backup">
+ <div class="section-title"><h2>Backup & Data Protection</h2></div>
+ <div class="notice danger-note"><b>Important:</b> Data is saved in this browser on this device. It is not automatically synced to other phones or computers. Export backups regularly and keep copies somewhere safe.</div>
+ <div class="card">
+  <h3>Backup your complete lounge data</h3>
+  <p class="muted">Includes rates, sessions, completed bills, income and expense records.</p>
+  <div class="actions"><button class="primary" id="exportData">Download backup file</button><label class="btn" for="importFile">Restore backup file</label><input id="importFile" type="file" accept=".json,application/json" hidden></div>
+  <p class="muted" id="backupStatus"></p>
+ </div>
+ <div class="card" style="margin-top:14px">
+  <h3>Data tools</h3>
+  <p class="muted">Use a backup before clearing browser data or changing devices.</p>
+  <div class="actions"><button class="danger" id="clearData">Clear all saved data</button></div>
+ </div>
+</section>
+<section class="view" id="device">
+ <div class="section-title"><h2>App Settings</h2></div>
+ <div class="settings-grid">
+  <div class="card">
+   <h3>Screen</h3>
+   <div class="formgrid" style="grid-template-columns:1fr">
+    <label>Screen rotation<select id="orientationSel">
+     <option value="auto">Auto-rotate (follow phone setting)</option>
+     <option value="always">Always auto-rotate (ignore phone lock)</option>
+     <option value="portrait">Lock portrait</option>
+     <option value="landscape">Lock landscape</option>
+    </select></label>
+    <label style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text)"><input type="checkbox" id="keepOnChk" style="width:auto;margin:0">Keep screen on while app is open</label>
+   </div>
+  </div>
+  <div class="card">
+   <h3>Background alarms</h3>
+   <p class="muted" style="margin-top:0">Alarms ring from the phone even when this app is closed or the screen is off, as long as these are all OK.</p>
+   <div id="bgStatus"></div>
+  </div>
+  <div class="card">
+   <h3>Automatic backup</h3>
+   <p class="muted" style="margin-top:0">Every change is saved instantly on this phone (two copies). A daily backup file is also kept in <b id="autoLoc">Download/GridGamingLounge</b> so data survives even if the app is uninstalled.</p>
+   <p id="autoStatus" class="muted"></p>
+   <div class="actions"><button class="primary" id="backupNowBtn">Back up now</button></div>
+  </div>
+ </div>
+</section>
+</main>
+<footer>GRID GAMING LOUNGE · Local device time · Save regular backups</footer>
+<script>
+"use strict";
+const KEY="gridGamingLounge_v1";
+const names=["Steering Simulator","PS Screen 1","PS Screen 2","PS Screen 3","PS Screen 4","PS Screen 5"];
+const defaultState=()=>({
+ rates:{steering:{normal:{half:0,hour:0},gta:{half:0,hour:0}},ps:Array.from({length:5},()=>({normal:Array.from({length:4},()=>({half:0,hour:0})),gta:Array.from({length:4},()=>({half:0,hour:0}))}))},
+ stations:names.map((name,i)=>({name,session:null})), records:[], entries:[]
+});
+let state=loadState(), soundCtx=null, soundEnabled=false, lastTick=Date.now();
+function migrateRates(){
+ const r=state.rates;
+ if(r?.steering && typeof r.steering.normal!=="object"){
+  r.steering={normal:{half:Number(r.steering.normal||0)/2,hour:Number(r.steering.normal||0)},gta:{half:Number(r.steering.gta||0)/2,hour:Number(r.steering.gta||0)}};
+ }
+ if(r?.ps?.length && typeof r.ps[0]?.normal?.[0]!=="object"){
+  r.ps=r.ps.map(p=>({normal:p.normal.map(v=>({half:Number(v||0)/2,hour:Number(v||0)})),gta:p.gta.map(v=>({half:Number(v||0)/2,hour:Number(v||0)}))}));
+ }
+ save();
+}
+migrateRates();
+function loadState(){const ok=x=>x&&x.stations?.length===6&&x.rates;let a=null,b=null;try{a=JSON.parse(localStorage.getItem(KEY));if(!ok(a))a=null}catch(e){a=null}try{if(window.AndroidBridge){b=JSON.parse(AndroidBridge.loadState()||"null");if(!ok(b))b=null}}catch(e){b=null}if(a&&b)return (b.savedAt||0)>(a.savedAt||0)?b:a;return a||b||defaultState()}
+function save(){state.savedAt=Date.now();const json=JSON.stringify(state);let ok=false;try{localStorage.setItem(KEY,json);ok=true}catch(e){}if(window.AndroidBridge){try{if(AndroidBridge.saveState(json))ok=true}catch(e){}syncNative()}if(!ok)alert("Could not save data. Device storage may be full. Export a backup and free storage.")}
+function syncNative(){if(!window.AndroidBridge)return;try{AndroidBridge.syncSessions(JSON.stringify(state.stations.map((st,i)=>st.session?{i,name:st.name,endsAt:st.session.endsAt}:null).filter(Boolean)))}catch(e){}}
+const $=id=>document.getElementById(id);
+const money=n=>"₹"+Number(n||0).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function localDay(ts=Date.now()){const d=new Date(ts);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function fmtTime(ts){return new Date(ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit",second:"2-digit"})}
+function updateClock(){const d=new Date();$("timeNow").textContent=d.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit",second:"2-digit"});$("dateNow").textContent=d.toLocaleDateString([],{weekday:"short",year:"numeric",month:"short",day:"numeric"})}
+function getRates(i,game,controllers){return i===0?state.rates.steering[game]:state.rates.ps[i-1][game][controllers-1]}
+function getRate(i,game,controllers){return Number(getRates(i,game,controllers)?.hour||0)}
+function chargeForMinutes(minutes,rate30,rate60){const full=Math.floor(minutes/60),half=Math.floor((minutes%60)/30);return Math.round((full*rate60+half*rate30)*100)/100}
+function durationCharge(s){return chargeForMinutes(s.durationMinutes||Math.round((s.endsAt-s.startedAt)/60000),s.rate30,s.rate60)}
+function remaining(s){return Math.max(0,s.endsAt-Date.now())}
+function fmtDuration(ms){let sec=Math.max(0,Math.ceil(ms/1000)),h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return [h,m,s].map(v=>String(v).padStart(2,"0")).join(":")}
+function beep(pattern="short"){if(!soundEnabled||!soundCtx)return;try{const now=soundCtx.currentTime;const seq=pattern==="urgent"?[0,0.18,0.36,0.54]:[0];seq.forEach((offset)=>{let o=soundCtx.createOscillator(),g=soundCtx.createGain();o.type="square";o.frequency.value=pattern==="urgent"?1050:850;g.gain.setValueAtTime(.0001,now+offset);g.gain.exponentialRampToValueAtTime(.55,now+offset+.015);g.gain.setValueAtTime(.55,now+offset+.11);g.gain.exponentialRampToValueAtTime(.0001,now+offset+.17);o.connect(g);g.connect(soundCtx.destination);o.start(now+offset);o.stop(now+offset+.18)})}catch(e){}}
+async function enableSound(){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC){alert("Audio is not supported in this browser.");return}soundCtx=soundCtx||new AC();await soundCtx.resume();soundEnabled=true;$("enableSound").textContent="Alarm sound enabled";$("enableSound").classList.remove("primary");beep();}catch(e){alert("Please allow sound/audio in your browser.")}}
+$("enableSound").addEventListener("click",enableSound);
+function renderStations(){const root=$("stations");root.innerHTML=state.stations.map((st,i)=>{const s=st.session,rem=s?remaining(s):0,exp=s&&rem<=300000&&rem>0;const game=s?.game||"normal";const ctr=s?.controllers||1;return `<article class="station ${s?"running":""} ${exp?"expiring":""}">
+ <div class="station-head"><h3>${esc(st.name)}</h3><span class="pill ${s?"live":""}">${s?(exp?"ENDING SOON":"RUNNING"):"AVAILABLE"}</span></div>
+ <div class="timer ${s&&rem===0?"done":""}" id="timer${i}">${s?fmtDuration(rem):"00:00:00"}</div>
+ <div class="meta"><span>${s?"Started "+fmtTime(s.startedAt):"Not in use"}</span><span>${s?esc(s.game==="gta"?"GTA 6":"Normal games"):"Ready"}</span></div>
+ ${!s?`<div class="fields"><label>Game<select id="game${i}"><option value="normal">Normal games</option><option value="gta">GTA 6</option></select></label>${i===0?`<label>Controllers<input value="Not applicable" disabled></label>`:`<label>Controllers<select id="ctrl${i}"><option value="1">1 controller</option><option value="2">2 controllers</option><option value="3">3 controllers</option><option value="4">4 controllers</option></select></label>`}</div>
+ <div class="price"><span>Hourly rate</span><span id="rate${i}">${money(getRate(i,"normal",1))}/hr</span></div>
+ <div class="fields"><label>Session length<select id="mins${i}"><option value="30">30 minutes</option><option value="60" selected>1 hour</option><option value="90">1 hour 30 minutes</option><option value="120">2 hours</option><option value="150">2 hours 30 minutes</option><option value="180">3 hours</option><option value="210">3 hours 30 minutes</option><option value="240">4 hours</option></select></label><label>Customer / note<input id="cust${i}" placeholder="Optional"></label></div>
+ <div class="controls"><button class="primary" onclick="startSession(${i})">Start</button><button onclick="previewRate(${i})">Check rate</button><button onclick="resetStation(${i})">Reset</button></div>`
+ :`<div class="price"><span>Saved rates</span><span>${money(s.rate30)}/30m · ${money(s.rate60)}/hr</span></div><div class="price"><span>Booked-time charge</span><span>${money(durationCharge(s))}</span></div><div class="meta"><span>${i===0?"No controller charge":ctr+" controller(s)"}</span><span>Ends ${fmtTime(s.endsAt)}</span></div>
+ <div class="controls"><button onclick="pauseNotSupported()" title="Timer continues against the real end time">Running</button><button class="blue" onclick="extendSession(${i})">+30 MIN</button><button class="danger" onclick="finishSession(${i})">Finish</button></div>`}
+ ${s&&rem===0?`<div class="notice danger-note">SESSION TIME EXPIRED — please finish or extend.</div>`:""}
+ </article>`}).join("");
+ state.stations.forEach((st,i)=>{if(!st.session){const g=$("game"+i),c=$("ctrl"+i);if(g)g.addEventListener("change",()=>updateStationRate(i));if(c)c.addEventListener("change",()=>updateStationRate(i));}});
+}
+function updateStationRate(i){const g=$("game"+i)?.value||"normal",c=i===0?1:Number($("ctrl"+i)?.value||1),r=getRates(i,g,c);$("rate"+i).textContent=money(r?.half||0)+"/30m · "+money(r?.hour||0)+"/hr"}
+function previewRate(i){updateStationRate(i);const g=$("game"+i).value,c=i===0?1:Number($("ctrl"+i).value),r=getRates(i,g,c);alert(`${names[i]}\n${g==="gta"?"GTA 6":"Normal games"}\n30-minute rate: ${money(r.half)}\n1-hour rate: ${money(r.hour)}`)}
+function startSession(i){const st=state.stations[i];if(st.session)return;const game=$("game"+i).value,controllers=i===0?0:Number($("ctrl"+i).value),mins=Math.max(30,Math.floor((Number($("mins"+i).value)||60)/30)*30),r=getRates(i,game,controllers||1),rate30=Number(r?.half||0),rate60=Number(r?.hour||0);if(rate30<=0||rate60<=0){alert("Please set both the 30-minute and 1-hour rates in Rate Settings before starting this station.");return}const now=Date.now();st.session={game,controllers,customer:$("cust"+i).value.trim(),startedAt:now,endsAt:now+mins*60000,initialMinutes:mins,durationMinutes:mins,rate30,rate60,alert5:false,alert15:false,expired:false};save();renderAll()}
+function extendSession(i){const s=state.stations[i].session;if(!s)return;s.endsAt=Math.max(Date.now(),s.endsAt)+30*60000;s.durationMinutes=(s.durationMinutes||Math.round((s.endsAt-s.startedAt-30*60000)/60000))+30;s.alert5=false;s.alert15=false;s.expired=false;save();renderAll()}
+function finishSession(i){const st=state.stations[i],s=st.session;if(!s)return;const now=Date.now(),amount=durationCharge(s);state.records.push({id:crypto.randomUUID?crypto.randomUUID():String(now)+i,station:st.name,game:s.game,controllers:s.controllers,customer:s.customer,startedAt:s.startedAt,endedAt:now,amount,day:localDay(now)});st.session=null;save();renderAll()}
+function resetStation(i){if(state.stations[i].session){if(!confirm("Reset this active station? This will discard its current session without billing."))return;state.stations[i].session=null;save();renderAll()}}
+function pauseNotSupported(){alert("Sessions use real elapsed time so the countdown remains accurate after refresh or when the page is backgrounded. To stop billing, finish the session.")}
+function renderAll(){renderStations();renderAccounts();renderRates();updateClock()}
+function dailySummary(){const day=localDay(),records=state.records.filter(x=>x.day===day),entries=state.entries.filter(x=>x.day===day);const rev=records.reduce((a,x)=>a+x.amount,0),inc=entries.filter(x=>x.type==="income").reduce((a,x)=>a+x.amount,0),exp=entries.filter(x=>x.type==="expense").reduce((a,x)=>a+x.amount,0);return {rev,inc,exp,net:rev+inc-exp,records,entries}}
+function renderAccounts(){const x=dailySummary();$("todayRevenue").textContent=money(x.rev);$("todayExpenses").textContent=money(x.exp);$("todayNet").textContent=money(x.net);$("activeCount").textContent=state.stations.filter(s=>s.session).length+" / 6";$("accRevenue").textContent=money(x.rev);$("accIncome").textContent=money(x.inc);$("accExpenses").textContent=money(x.exp);$("accNet").textContent=money(x.net);$("accountDate").textContent=new Date().toLocaleDateString();const rows=[...x.records.map(r=>({time:r.endedAt,type:"Session revenue",cat:r.station,detail:(r.game==="gta"?"GTA 6":"Normal")+(r.customer?" · "+r.customer:""),amount:r.amount,id:r.id,kind:"record"})),...x.entries.map(e=>({time:e.createdAt,type:e.type==="expense"?"Expense":"Other income",cat:e.category,detail:e.note,amount:e.amount,id:e.id,kind:"entry"}))].sort((a,b)=>b.time-a.time);$("entriesBody").innerHTML=rows.length?rows.map(r=>`<tr><td>${fmtTime(r.time)}</td><td>${esc(r.type)}</td><td>${esc(r.cat)}</td><td>${esc(r.detail||"")}</td><td class="right">${money(r.amount)}</td><td>${r.kind==="entry"?`<button class="danger" style="padding:5px 8px" onclick="deleteEntry('${r.id}')">Delete</button>`:""}</td></tr>`).join(""):`<tr><td colspan="6" class="empty">No entries recorded today.</td></tr>`}
+function addEntry(){const amount=Number($("entryAmount").value),category=$("entryCategory").value.trim();if(!amount||amount<=0||!category){alert("Enter a valid amount and category.");return}const now=Date.now();state.entries.push({id:crypto.randomUUID?crypto.randomUUID():String(now),type:$("entryType").value,amount,category,note:$("entryNote").value.trim(),createdAt:now,day:localDay(now)});save();$("entryAmount").value="";$("entryCategory").value="";$("entryNote").value="";renderAccounts()}
+function deleteEntry(id){if(!confirm("Delete this entry?"))return;state.entries=state.entries.filter(e=>e.id!==id);save();renderAccounts()}
+$("addEntry").addEventListener("click",addEntry);
+function renderRates(){
+ const sn=state.rates.steering.normal,sg=state.rates.steering.gta;
+ $("steerNormal30").value=sn.half;$("steerNormal60").value=sn.hour;
+ $("steerGta30").value=sg.half;$("steerGta60").value=sg.hour;
+ $("psRateCards").innerHTML=state.rates.ps.map((p,i)=>`<div class="card"><h3>PS Screen ${i+1}</h3><div class="tablewrap"><table class="rate-table"><thead><tr><th>Controllers</th><th>Normal 30m (₹)</th><th>Normal 1h (₹)</th><th>GTA 6 30m (₹)</th><th>GTA 6 1h (₹)</th></tr></thead><tbody>${[0,1,2,3].map(j=>`<tr><td>${j+1}</td><td><input type="number" min="0" step=".01" id="p${i}n${j}h"></td><td><input type="number" min="0" step=".01" id="p${i}n${j}f"></td><td><input type="number" min="0" step=".01" id="p${i}g${j}h"></td><td><input type="number" min="0" step=".01" id="p${i}g${j}f"></td></tr>`).join("")}</tbody></table></div></div>`).join("");
+ state.rates.ps.forEach((p,i)=>[0,1,2,3].forEach(j=>{$(`p${i}n${j}h`).value=p.normal[j].half;$(`p${i}n${j}f`).value=p.normal[j].hour;$(`p${i}g${j}h`).value=p.gta[j].half;$(`p${i}g${j}f`).value=p.gta[j].hour;}));
+}
+function saveRates(){
+ state.rates.steering.normal={half:Math.max(0,Number($("steerNormal30").value)||0),hour:Math.max(0,Number($("steerNormal60").value)||0)};
+ state.rates.steering.gta={half:Math.max(0,Number($("steerGta30").value)||0),hour:Math.max(0,Number($("steerGta60").value)||0)};
+ state.rates.ps.forEach((p,i)=>[0,1,2,3].forEach(j=>{
+  p.normal[j]={half:Math.max(0,Number($(`p${i}n${j}h`).value)||0),hour:Math.max(0,Number($(`p${i}n${j}f`).value)||0)};
+  p.gta[j]={half:Math.max(0,Number($(`p${i}g${j}h`).value)||0),hour:Math.max(0,Number($(`p${i}g${j}f`).value)||0)};
+ }));
+ save();renderAll();alert("30-minute and 1-hour rates saved. Active sessions keep their original rates.");
+}
+$("saveRates").addEventListener("click",saveRates);
+function exportData(){const json=JSON.stringify({app:"Grid Gaming Lounge",version:1,exportedAt:new Date().toISOString(),data:state},null,2);if(window.AndroidBridge){const name="Grid-Gaming-Lounge-backup-"+localDay()+"-"+new Date().toTimeString().slice(0,8).replace(/:/g,"")+".json",r=AndroidBridge.exportBackup(json,name);$("backupStatus").textContent=r;alert(r.startsWith("ERROR")?"Backup failed: "+r.slice(7):"Backup saved to your phone's Downloads folder:\n"+r.slice(9));return}const blob=new Blob([json],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Grid-Gaming-Lounge-backup-"+localDay()+".json";a.click();URL.revokeObjectURL(a.href);$("backupStatus").textContent="Backup downloaded: "+new Date().toLocaleString()}
+$("exportData").addEventListener("click",exportData);
+$("importFile").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{const obj=JSON.parse(await f.text()),d=obj.data||obj;if(!d.stations||d.stations.length!==6||!d.rates||!Array.isArray(d.records)||!Array.isArray(d.entries))throw Error("Invalid backup file");if(!confirm("Restore this backup? Current data on this device will be replaced."))return;state=d;save();renderAll();$("backupStatus").textContent="Backup restored successfully."}catch(err){alert("Could not restore this file: "+err.message)}e.target.value=""});
+$("clearData").addEventListener("click",()=>{if(!confirm("Permanently clear ALL Grid Gaming Lounge data from this browser? Export a backup first. This cannot be undone."))return;state=defaultState();save();renderAll()});
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===b.dataset.view));if(b.dataset.view==="rates")renderRates();if(b.dataset.view==="accounts")renderAccounts();if(b.dataset.view==="device")renderDevice()}));
+function tick(){const now=Date.now();state.stations.forEach((st,i)=>{const s=st.session;if(!s)return;const rem=s.endsAt-now;if(rem<=300000&&rem>15000&&!s.alert5){s.alert5=true;beep("short");save()}if(rem<=15000&&rem>0&&!s.alert15){s.alert15=true;beep("urgent");save()}if(rem<=0&&!s.expired){s.expired=true;beep("urgent");save();}const el=$("timer"+i);if(el){el.textContent=fmtDuration(rem);el.classList.toggle("done",rem<=0)}const card=el?.closest(".station");if(card)card.classList.toggle("expiring",rem<=300000&&rem>0)});if(Math.floor(now/1000)!==Math.floor(lastTick/1000)){updateClock();renderAccounts()}lastTick=now}
+function renderDevice(){if(!window.AndroidBridge)return;let x={};try{x=JSON.parse(AndroidBridge.getSettings())}catch(e){return}$("orientationSel").value=x.orientation||"auto";$("keepOnChk").checked=!!x.keepOn;$("autoLoc").textContent=x.backupLocation||"Download/GridGamingLounge";$("autoStatus").textContent=x.lastAutoBackup?"Last automatic backup: "+x.lastAutoBackup:(x.autoBackupError?"Auto-backup problem: "+x.autoBackupError:"No automatic backup yet (made a few seconds after your first change).");const row=(label,good,fix,btn)=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)"><span>${good?"✅":"⚠️"} ${label}</span>${good?'<span class="muted">OK</span>':`<button class="warning" style="padding:7px 10px" onclick="AndroidBridge.${fix}()">${btn}</button>`}</div>`;$("bgStatus").innerHTML=row("Notifications allowed",x.notifications,"openNotificationSettings","Allow")+row("Battery: unrestricted",x.batteryUnrestricted,"openBatterySettings","Fix")+row("Exact alarms",x.exactAlarms,"openAppInfo","Open settings")+`<p class="muted" style="font-size:12px">On Xiaomi, Redmi, Oppo, Vivo, Realme or OnePlus phones also open App info → Battery and choose "No restrictions", and turn on "Autostart" if shown.</p>`}
+window.onNativeSettingsChanged=renderDevice;
+if(window.AndroidBridge){$("deviceTab").hidden=false;$("alarmNotice").textContent="Alarms also ring as phone notifications when the app is in the background, closed, or the screen is off. Data saves automatically on every change.";document.querySelector("footer").textContent="GRID GAMING LOUNGE · Data auto-saved on this phone · Daily backup in Download/GridGamingLounge";$("orientationSel").addEventListener("change",e=>AndroidBridge.setOrientation(e.target.value));$("keepOnChk").addEventListener("change",e=>AndroidBridge.setKeepScreenOn(e.target.checked));$("backupNowBtn").addEventListener("click",()=>{const r=AndroidBridge.backupNow();renderDevice();alert(r.startsWith("ERROR")?"Backup failed: "+r.slice(7):r)});(async()=>{try{const AC=window.AudioContext||window.webkitAudioContext;soundCtx=new AC();await soundCtx.resume();if(soundCtx.state==="running"){soundEnabled=true;$("enableSound").textContent="Alarm sound enabled";$("enableSound").classList.remove("primary")}}catch(e){}})();syncNative();renderDevice()}
+renderAll();setInterval(tick,250);window.addEventListener("focus",()=>{tick();renderAll()});document.addEventListener("visibilitychange",()=>{if(!document.hidden){tick();renderAll()}});
+</script>
+</body>
+</html>
