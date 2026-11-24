@@ -9,6 +9,7 @@ cd "$(dirname "$0")"
 if [ ! -f "$SDK_DIR/framework.zip" ]; then
   tmp=$(mktemp -d); (cd "$tmp" && unzip -oq "$SDK_DIR/android-all.jar" AndroidManifest.xml resources.arsc && zip -q "$SDK_DIR/framework.zip" AndroidManifest.xml resources.arsc); rm -rf "$tmp"
 fi
+python3 -I src-web/inline.py
 rm -rf build && mkdir -p build/gen build/classes
 aapt package -f -m -J build/gen -M AndroidManifest.xml -S res -I "$SDK_DIR/framework.zip"
 javac -nowarn --release 8 -cp "$SDK_DIR/android-all.jar" -d build/classes build/gen/com/gridgaming/lounge/R.java src/com/gridgaming/lounge/*.java
