@@ -68,7 +68,9 @@ public class SessionService extends Service {
             long e = s.optLong("endsAt", 0);
             String name = s.optString("name", "Station");
             if (lines.length() > 0) lines.append('\n');
-            if (e <= now) {
+            if (s.optBoolean("paused", false)) {
+                lines.append(name).append(" — paused");
+            } else if (e <= now) {
                 expired++;
                 lines.append(name).append(" — TIME UP");
             } else {

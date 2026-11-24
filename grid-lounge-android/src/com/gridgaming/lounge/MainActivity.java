@@ -154,8 +154,14 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // Keep the app running in the background instead of closing it.
-        moveTaskToBack(true);
+        // Let the web UI close sheets / pages first; otherwise keep the app running in the background.
+        if (web == null) { moveTaskToBack(true); return; }
+        web.evaluateJavascript("(window.handleBack&&window.handleBack())?'1':'0'", new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String v) {
+                if (v == null || !v.contains("1")) moveTaskToBack(true);
+            }
+        });
     }
 
     @Override
@@ -265,6 +271,45 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
+        public String saveFile(String name, String mime, String text) {
+            try {
+                Store.writeDownload(getApplicationContext(), name, text, null, mime);
+                return "Saved to " + Store.backupLocation() + "/" + name;
+            } catch (Exception e) {
+                return "ERROR: " + e.getMessage();
+            }
+        }
+
+        @JavascriptInterface
+        public void shareText(final String text) {
+            main.post(new Runnable() {
+                public void run() {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_TEXT, text);
+                    try { startActivity(Intent.createChooser(i, "Share receipt")); } catch (Exception ignored) { }
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void openUrl(final String url) {
+            main.post(new Runnable() {
+                public void run() {
+                    try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url))); }
+                    catch (Exception e) { android.widget.Toast.makeText(MainActivity.this, "No app found to open this", android.widget.Toast.LENGTH_SHORT).show(); }
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void printHtml(final String html, final String jobName) {
+            main.post(new Runnable() {
+                public void run() { printDocument(html, jobName); }
+            });
+        }
+
+        @JavascriptInterface
         public String backupNow() {
             String w = Store.autoBackup(getApplicationContext());
             return w.isEmpty() ? "ERROR: " + Store.prefs(getApplicationContext()).getString("autoError", "no data yet")
@@ -345,6 +390,27 @@ public class MainActivity extends Activity {
         public void openAppInfo() {
             main.post(new Runnable() { public void run() { openAppSettings(); } });
         }
+    }
+
+    private WebView printView;
+
+    /** Renders receipt HTML off-screen and hands it to Android printing (printers or Save as PDF). */
+    private void printDocument(String html, final String jobName) {
+        final WebView pv = new WebView(this);
+        printView = pv; // keep a reference until printing starts
+        pv.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                try {
+                    android.print.PrintManager pm = (android.print.PrintManager) getSystemService(Context.PRINT_SERVICE);
+                    String name = jobName == null || jobName.isEmpty() ? "Receipt" : jobName;
+                    pm.print(name, view.createPrintDocumentAdapter(name), new android.print.PrintAttributes.Builder().build());
+                } catch (Exception e) {
+                    android.widget.Toast.makeText(MainActivity.this, "Printing is not available", android.widget.Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        pv.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
     }
 
     private void openAppSettings() {

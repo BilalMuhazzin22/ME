@@ -25,7 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         String name = null;
         for (int k = 0; k < arr.length(); k++) {
             JSONObject s = arr.optJSONObject(k);
-            if (s != null && s.optInt("i", -1) == station && s.optLong("endsAt", 0) == endsAt) {
+            if (s != null && s.optInt("i", -1) == station && s.optLong("endsAt", 0) == endsAt && !s.optBoolean("paused", false)) {
                 name = s.optString("name", "Station " + (station + 1));
             }
         }

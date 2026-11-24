@@ -180,6 +180,7 @@ final class Store {
             if (s == null) continue;
             int i = s.optInt("i", -1);
             if (i < 0 || i >= STATIONS) continue;
+            if (s.optBoolean("paused", false)) continue; // paused: no alarms until resumed
             active[i] = true;
             String name = s.optString("name", "Station " + (i + 1));
             long endsAt = s.optLong("endsAt", 0);
@@ -219,6 +220,10 @@ final class Store {
 
     /** Writes text to Download/GridGamingLounge/<name>. If reuse is non-null, tries to overwrite that file first. Returns the file's uri/path. */
     static String writeDownload(Context c, String name, String text, String reuse) throws Exception {
+        return writeDownload(c, name, text, reuse, "application/json");
+    }
+
+    static String writeDownload(Context c, String name, String text, String reuse, String mime) throws Exception {
         byte[] data = text.getBytes(StandardCharsets.UTF_8);
         if (Build.VERSION.SDK_INT >= 29) {
             ContentResolver cr = c.getContentResolver();
@@ -235,7 +240,7 @@ final class Store {
             }
             ContentValues v = new ContentValues();
             v.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
-            v.put(MediaStore.MediaColumns.MIME_TYPE, "application/json");
+            v.put(MediaStore.MediaColumns.MIME_TYPE, mime);
             v.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/" + BACKUP_DIR);
             Uri uri = cr.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, v);
             if (uri == null) throw new Exception("Could not create file in Downloads");
