@@ -632,8 +632,9 @@ function loadState(){
  let a=null,b=null;
  try{a=JSON.parse(localStorage.getItem(KEY));if(!validState(a))a=null}catch(e){a=null}
  try{if(bridge){b=JSON.parse(bridge.loadState()||"null");if(!validState(b))b=null}}catch(e){b=null}
- if(a&&b)return (b.savedAt||0)>(a.savedAt||0)?b:a;
- return a||b||defaultState();
+ const pick=a&&b?((b.savedAt||0)>(a.savedAt||0)?b:a):(a||b);
+ if(pick&&pick===b){try{localStorage.setItem(KEY,JSON.stringify(b))}catch(e){}} // re-sync the browser copy from the phone copy
+ return pick||defaultState();
 }
 let state=normalize(loadState());
 function migrateRates(){
